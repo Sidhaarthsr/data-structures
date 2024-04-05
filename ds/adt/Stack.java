@@ -1,3 +1,5 @@
+package adt;
+
 import java.util.EmptyStackException;
 
 public class Stack {
