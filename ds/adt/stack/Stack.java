@@ -1,15 +1,19 @@
-package adt;
+package adt.stack;
 
 import java.util.EmptyStackException;
 
-public class ArrayStack<E> {
+public class Stack {
 
-    private E[] stack;
+    private int[] stack;
     private int top;
 
-    @SuppressWarnings("unchecked")
-    public ArrayStack(int capacity) {
-        stack = (E[]) new Object[capacity];
+    /**
+     * Constructor to create a stack with a given size.
+     * 
+     * @param size the size of the stack
+     */
+    public Stack(final int size) {
+        stack = new int[size];
         top = -1;
     }
 
@@ -18,7 +22,7 @@ public class ArrayStack<E> {
      * 
      * @param value the value to push
      */
-    public void push(E value) {
+    public void push(int value) {
         if (top == stack.length - 1) {
             throw new StackOverflowError();
         }
@@ -30,13 +34,11 @@ public class ArrayStack<E> {
      * 
      * @return the value at the top of the stack
      */
-    public E pop() {
+    public int pop() {
         if (isEmpty()) {
             throw new EmptyStackException();
         }
-        final E popped = stack[top];
-        stack[top--] = null;
-        return popped;
+        return stack[top--];
     }
 
     /**
@@ -44,17 +46,14 @@ public class ArrayStack<E> {
      * 
      * @return the value at the top of the stack
      */
-    public E peek() {
-        if (isEmpty()) {
-            throw new EmptyStackException();
-        }
+    public int peek() {
         return stack[top];
     }
 
     /**
-     * Returns true if the stack is empty.
+     * Returns whether the stack is empty.
      * 
-     * @return true if the stack is empty
+     * @return
      */
     public boolean isEmpty() {
         return top == -1;
@@ -67,5 +66,12 @@ public class ArrayStack<E> {
      */
     public int size() {
         return top + 1;
+    }
+
+    /**
+     * Removes all elements from the stack.
+     */
+    public void clear() {
+        top = -1;
     }
 }
